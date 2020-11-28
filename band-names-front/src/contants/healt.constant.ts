@@ -1,0 +1,3 @@
+export const HEALT_START = 'HEALT_START'
+export const HEALT_SUCCESS = 'HEALT_SUCCESS'
+export const HEALT_ERROR = 'HEALT_ERROR'
