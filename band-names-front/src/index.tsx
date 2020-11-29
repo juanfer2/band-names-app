@@ -13,13 +13,11 @@ import store from './flux/store'
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
       <Suspense fallback={'loanding...'}>
         <Provider store={store}>
           <App />
         </Provider>
       </Suspense>
-    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 )

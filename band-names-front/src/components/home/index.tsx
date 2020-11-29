@@ -3,25 +3,18 @@ import { map, filter, mergeMap, delay } from 'rxjs/operators'
 import { from } from 'rxjs'
 import { userList } from '../../data'
 
-import { useHome } from './useHome'
-import ListCard from '../listCards'
+import { useFetchSocket } from './useHome'
+import Bands from '../bands'
+import AlertConnection from '../alertConnection'
 
-let numbersObservable = from([1, 2, 3, 4, 5])
-let squareNumbers = numbersObservable.pipe(
-  filter((val) => val > 2),
-  mergeMap((val) => from([val]).pipe(delay(1000 * val))),
-  map((val) => val * val),
-)
 
 function Home() {
-  const [currentNumber, setCurrentNumber] = useState<Number>(0)
-  useHome(squareNumbers, setCurrentNumber)
-
+  const {online, bands, loanding, createBand} = useFetchSocket()
   return (
     <div>
-      <h1>HOME Rsjx</h1>
-      <span>{currentNumber}</span>
-      <ListCard listCard={userList} />
+      <h1>Bands</h1>
+      <AlertConnection online={online} />
+      <Bands bands={bands} loanding={loanding} createBand={createBand} />
     </div>
   )
 }
