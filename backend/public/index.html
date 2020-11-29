@@ -13,13 +13,8 @@
     />
   </head>
   <body class="container">
-    <h1 class="mt-5">Mini chat</h1>
+    <h1 class="mt-5">Band Names</h1>
     <hr />
-
-    <div>
-      <input type="text" class="form-control" id="msg" />
-      <button id="sendData" class="btn btn-success">Enviar</button>
-    </div>
 
     <div>
       <ul id="list" class="list-group list-group-flush"></ul>
@@ -32,8 +27,6 @@
     ></script>
 
     <script>
-      const btn = document.getElementById("sendData");
-      const msg = document.getElementById("msg");
       const list = document.getElementById("list");
 
       const createLI = () => {
@@ -42,32 +35,20 @@
         return newLI;
       };
 
-      const msgList = (data) => {
+      const appendToList = (data) => {
         var newLI = createLI();
-        newLI.appendChild(
-          document.createTextNode(`(${data.date}) ${data.msg}`)
-        );
+        newLI.appendChild(document.createTextNode(`${data.name}`));
         return newLI;
       };
 
       // Conexión con el socket server
       const socket = io("http://localhost:8080");
 
-      /// Para emitir
-      btn.onclick = function () {
-        const data = {
-          msg: msg.value,
-          date: new Date(),
-        };
-        socket.emit("mensaje-to-server", data);
-        msg.value = "";
-      };
-
       // Para escuchar
-      socket.on("mensaje-from-server", (data) => {
+      socket.on("current-bands", (data) => {
         // callback a ejecutar
         console.log(data);
-        list.appendChild(msgList(data));
+        data.map((band) => list.appendChild(appendToList(band)));
       });
     </script>
   </body>
