@@ -1,6 +1,9 @@
+import React, {useMemo} from 'react'
 import io from 'socket.io-client'
-export const connectSocketServer = () => {
-  var socket: SocketIOClient.Socket = io.connect('http://localhost:8080',{
+
+// 'http://localhost:8080'
+export const connectSocketServer = (serverPath: string) => {
+  var socket: SocketIOClient.Socket = io.connect(serverPath,{
     transports: ['websocket']
   })
   return socket

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Bands({bands, loanding, createBand}: {bands:BandInterface[], loanding: Boolean, createBand:any}) {
+function Bands({bands, loanding, createBand, voteBand}: {bands:BandInterface[], loanding: Boolean, createBand:any, voteBand:any}) {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
 
@@ -34,11 +34,11 @@ function Bands({bands, loanding, createBand}: {bands:BandInterface[], loanding: 
   
   return (
     <div>
-      {/*<BandGraphic/>*/}
+      <BandGraphic bands={bands} />
       <BandForm onSubmit={createBand} />
       <div className={classes.demo}>
         <List dense={dense}>
-          { bands && bands.map((band: BandInterface, i:number) => <BandItem key={i} name={band.name} votes={band.vote} />)}
+          { bands && bands.map((band: BandInterface, i:number) => <BandItem key={i} id={band.id} name={band.name} votes={band.vote} voteBand={voteBand} />)}
         </List>
       </div>
     </div>

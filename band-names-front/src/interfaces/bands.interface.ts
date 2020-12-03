@@ -9,4 +9,5 @@ export interface  UseFetchSocketInterface {
   bands: BandInterface[]
   loanding: Boolean
   createBand: Function
+  voteBand: Function
 }

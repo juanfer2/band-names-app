@@ -15,7 +15,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import EditIcon from '@material-ui/icons/Edit';
 
-function BandItem({name, votes}: InferProps<typeof BandItem.propTypes>) {
+function BandItem({id, name, votes,  voteBand}: InferProps<typeof BandItem.propTypes>) {
   return (
     <ListItem>
       <ListItemAvatar>
@@ -30,10 +30,10 @@ function BandItem({name, votes}: InferProps<typeof BandItem.propTypes>) {
         secondary={'Likes '+votes}
       />
       <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="delete" color="primary">
+        <IconButton onClick={  () => voteBand(id)} edge="end" aria-label="vote" color="primary">
           <ThumbUpAltIcon />
         </IconButton>
-        <IconButton edge="end" aria-label="delete" color="primary">
+        <IconButton edge="end" aria-label="edit" color="primary">
           <EditIcon />
         </IconButton>
         <IconButton edge="end" aria-label="delete" color="secondary">
@@ -45,8 +45,10 @@ function BandItem({name, votes}: InferProps<typeof BandItem.propTypes>) {
 }
 
 BandItem.propTypes = {
+  id: PropTypes.string,
   name: PropTypes.string,
-  votes: PropTypes.any
+  votes: PropTypes.any,
+  voteBand: PropTypes.any,
 }
 
 export default BandItem

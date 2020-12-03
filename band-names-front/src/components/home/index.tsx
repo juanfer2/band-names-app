@@ -9,12 +9,12 @@ import AlertConnection from '../alertConnection'
 
 
 function Home() {
-  const {online, bands, loanding, createBand} = useFetchSocket()
+  const {online, bands, loanding, createBand, voteBand} = useFetchSocket()
   return (
     <div>
       <h1>Bands</h1>
       <AlertConnection online={online} />
-      <Bands bands={bands} loanding={loanding} createBand={createBand} />
+      <Bands bands={bands} loanding={loanding} createBand={createBand} voteBand={voteBand} />
     </div>
   )
 }

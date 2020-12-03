@@ -6,13 +6,18 @@ import {connectSocketServer} from '../../../socketConnection'
 
 export const useFetchSocket = (): UseFetchSocketInterface => {
 
-  const [socket, setSocket] = useState<SocketIOClient.Socket >( connectSocketServer() )
+  const [socket, setSocket] = useState<SocketIOClient.Socket >( connectSocketServer('http://localhost:8080') )
   const [online, setOnline] = useState(false)
   const [loanding, setLoanding] = useState(false)
   const [bands, setBands] = useState([])
 
   const createBand = (name: string) => {
     socket.emit('add-band', name)
+  }
+
+  const voteBand = (id: string) => {
+    console.log('vote band')
+    socket.emit('vote-band', id)
   }
 
   useEffect(() => {
@@ -32,17 +37,16 @@ export const useFetchSocket = (): UseFetchSocketInterface => {
   }, [ socket ])
 
   useEffect( () => {
-    setLoanding(true)
     socket.on('current-bands', (bands: any) => {
       setBands( bands );
     })
-    setLoanding(false)
   }, [ socket ])
 
   return {
     online,
     bands,
     loanding,
-    createBand
+    createBand,
+    voteBand
   }
 }
